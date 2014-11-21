@@ -19,66 +19,97 @@
 
 #include "Life.h"
 
+TEST(Life, n1) {
+    ConwayCell cell(true);
+    ASSERT_TRUE(cell.getState() == '*');
+    
+}
+
+TEST(Life, n2) {
+    FredkinCell cell(true);
+    ASSERT_TRUE(cell.getState() == '0');
+}
+
+TEST(Life, n3) {
+    ConwayCell cell(false);
+    ASSERT_TRUE(cell.getState() == '.');
+}
+TEST(Life, n4) {
+    FredkinCell cell(false);
+    ASSERT_TRUE(cell.getState() == '.');
+}
+
+
 TEST(Life, t1) {
     ConwayCell cell(true);
-    cell.changeState(0);
+    cell.setNeighbors(0);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());
     
 }
-/*
+
 TEST(Life, t2) {
     ConwayCell cell(true);
-    cell.changeState(1);
+    cell.setNeighbors(1);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());
 }
 
 TEST(Life, t3) {
     ConwayCell cell(true);
-    cell.changeState(2);
-    ASSERT_TRUE(c.isAlive());    
+    cell.setNeighbors(2);
+    cell.changeState();
+    ASSERT_TRUE(cell.isAlive());    
 }
 
 TEST(Life, t4) {
     ConwayCell cell(true);
-    cell.changeState(3);
+    cell.setNeighbors(3);
+    cell.changeState();
     ASSERT_TRUE(cell.isAlive());    
 }
 TEST(Life, t5) {
     ConwayCell cell(true);
-    cell.changeState(4);
+    cell.setNeighbors(4);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());    
 }
 TEST(Life, t6) {
     ConwayCell cell(true);
-    cell.changeState(8);
+    cell.setNeighbors(8);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());    
+}
+TEST(Life, t7) {
+    ConwayCell cell(false);
+    cell.setNeighbors(3);
+    cell.changeState();
+    ASSERT_TRUE(cell.isAlive());    
 }
 
 TEST(Life, f1) {
     FredkinCell cell(true);
-    cell.changeState(0);
+    cell.setNeighbors(0);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());    
 }
 TEST(Life, f2) {
     FredkinCell cell(true);
-    cell.changeState(4);
+    cell.setNeighbors(4);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());    
 }
 TEST(Life, f3) {
     FredkinCell cell(true);
-    cell.changeState(3);
+    cell.setNeighbors(3);
+    cell.changeState();
     ASSERT_TRUE(cell.isAlive());    
 }
 
 TEST(Life, f4) {
     FredkinCell cell(false);
-    cell.changeState(3);
-    ASSERT_TRUE(cell.isAlive());    
-}
-
-TEST(Life, f5) {
-    FredkinCell cell(false);
-    cell.changeState(0);
+    cell.setNeighbors(0);
+    cell.changeState();
     ASSERT_TRUE(!cell.isAlive());    
 }
-*/
+

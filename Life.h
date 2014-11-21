@@ -19,11 +19,13 @@ class AbstractCell {
         virtual bool equals (const AbstractCell& that) const = 0;
 
     public:
+      //Abstract methods
       virtual bool diagNeighbors() = 0;
-      virtual void setNeighbors(int n) = 0;
       virtual void changeState() = 0;
       virtual char getState() = 0;
-      virtual bool isAlive() = 0;
+      //Methods with default implementation
+      virtual bool isAlive();
+      virtual void setNeighbors(int n);
       
       AbstractCell (bool living){
         alive = living;
@@ -46,20 +48,20 @@ class ConwayCell : public AbstractCell {
         return true; 
       }
       bool diagNeighbors();
-      void setNeighbors(int n);
       void changeState();
       char getState();
-      bool isAlive();
 };
 
 class FredkinCell : public AbstractCell {
     public:
       FredkinCell(bool living) : AbstractCell(living) {}
+      bool equals(const AbstractCell& that) const{
+       //TODO
+        return true; 
+      }
       bool diagNeighbors();
-      void setNeighbors(int n);
       void changeState();
       char getState();
-      bool isAlive();
 
 };
 // ---------
