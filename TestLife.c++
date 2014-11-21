@@ -19,6 +19,13 @@
 
 #include "Life.h"
 
+TEST(Life, n0){
+  ConwayCell cell(false);
+  FredkinCell cell2(true);
+  ASSERT_TRUE(cell.diagNeighbors());
+  ASSERT_FALSE(cell2.diagNeighbors());
+}
+
 TEST(Life, n1) {
     ConwayCell cell(true);
     ASSERT_TRUE(cell.getState() == '*');
@@ -39,6 +46,28 @@ TEST(Life, n4) {
     ASSERT_TRUE(cell.getState() == '.');
 }
 
+TEST(Life, n5) {
+    FredkinCell cell(true);
+    cell.setNeighbors(1);
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    ASSERT_TRUE(cell.getState() == '3');
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    cell.changeState();
+    ASSERT_TRUE(cell.getState() == '+');
+}
 
 TEST(Life, t1) {
     ConwayCell cell(true);

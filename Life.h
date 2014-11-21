@@ -11,13 +11,10 @@ class AbstractCell {
     protected:
         bool alive;
         int neighbors;      
-        AbstractCell& operator = (const AbstractCell& that) {
-            alive = that.alive;
-            neighbors = that.neighbors;
-            return *this;}
 
         virtual bool equals (const AbstractCell& that) const = 0;
 
+        
     public:
       //Abstract methods
       virtual bool diagNeighbors() = 0;
@@ -30,6 +27,10 @@ class AbstractCell {
       AbstractCell (bool living){
         alive = living;
       }
+      AbstractCell& operator = (const AbstractCell& that) {
+            alive = that.alive;
+            neighbors = that.neighbors;
+            return *this;}
 /*
       AbstractShape (const AbstractShape& that) :
                 _x (that._x),
@@ -43,18 +44,21 @@ class AbstractCell {
 class ConwayCell : public AbstractCell {
     public:
       ConwayCell(bool living) : AbstractCell(living) {}
+      ConwayCell(const ConwayCell& that) : AbstractCell(that)   { }
       bool equals(const AbstractCell& that) const{
-       //TODO
         return true; 
       }
+      
       bool diagNeighbors();
       void changeState();
       char getState();
 };
 
 class FredkinCell : public AbstractCell {
+    private: 
+      int age;
     public:
-      FredkinCell(bool living) : AbstractCell(living) {}
+      FredkinCell(bool living) : AbstractCell(living) { age = 0; }
       bool equals(const AbstractCell& that) const{
        //TODO
         return true; 
@@ -122,51 +126,36 @@ class Cell {
             std::swap(_p, that._p);}};
 
 // End Cell Handle
-/* start
-class ConwayCell : public AbstractShape {
-    private:
-        int _r;
 
-    protected:
-        virtual bool equals (const AbstractShape& that) const {
-            if (const Circle* const p = dynamic_cast<const Circle*>(&that))
-                return AbstractShape::equals(*p) && (_r == p->_r);
-            return false;}
+using namespace std;
+template<typename T>
+class Life {
+  private:
+    int x;
+    int y; 
+    vector< vector<T> > grid; 
+  
+  public:
+    Life<T>(int x1, int y1){
+      x = x1;
+      y = y1;
+      T filler(false);
+      vector<T> filled(y, filler);
+      grid.resize(x, filled );
+    }
 
-        virtual std::istream& read (std::istream& in) {
-            return AbstractShape::read(in) >> _r;}
+    void printGrid(ostream& out){
+      for(vector<T> row : grid){
+        for(T cell : row){
+          out << cell.getState();
+        }
+        out << endl;
+      }
+    }  
+    void move(int n);
+    void AddCell(T cell, int r, int c);
+};
 
-        virtual std::ostream& write (std::ostream& out) const {
-            return AbstractShape::write(out) << " " << _r;}
 
-    public:
-        Circle (int x, int y, int r) :
-                AbstractShape (x, y),
-                _r            (r)
-            {}
-end*/
-/*
-        Circle (const Circle& that) :
-                AbstractShape (that),
-                _r            (that._r)
-            {}
 
-        virtual ~Circle ()
-            {}
-
-        Circle& operator = (const Circle& that) {
-            AbstractShape::operator=(that);
-            _r = that._r;
-            return *this;}
-*/
-
-/*restart        virtual double area () const {
-            return 3.14 * _r * _r;}
-
-        virtual Circle* clone () const {
-            return new Circle(*this);}
-
-        int radius () const {
-            return _r;}};
-*/
 #endif // Shapes_h
