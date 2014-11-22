@@ -135,7 +135,7 @@ int main () {
     // ------------------
     // Fredkin Cell 20x20
     // ------------------
-/*
+
   {
     cout << "*** Life<FredkinCell> 20x20 ***" << endl;
     pair<int, int> sizes = readHeader(cin);
@@ -155,7 +155,7 @@ int main () {
       life.printGrid(cout); 
       life.move(1);
     }
-  } */  
+  }
     /*
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)
@@ -165,7 +165,26 @@ int main () {
     // Cell 20x20
     // ----------
 
+  {
     cout << "*** Life<Cell> 20x20 ***" << endl;
+    pair<int, int> sizes = readHeader(cin);
+    Life<Cell> life(sizes); 
+    string line;
+    int x, y;
+    for(x = 0; x < sizes.first; x++){
+      line = readGrid(cin); 
+      const char *cstr = line.c_str();
+      for(y = 0; y < sizes.second; y++){
+        if(cstr[y] == '0') life.addCell(FREDKIN, x, y);
+      }
+    }
+    life.printGrid(cout);
+    int moves;
+    for(moves = 0; moves <= 5; moves++){
+      life.printGrid(cout); 
+      life.move(1);
+    }
+  }
     /*
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)

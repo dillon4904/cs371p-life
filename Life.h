@@ -45,7 +45,7 @@ class AbstractCell {
                 _y (that._y)
             {}
 */
-      // virtual AbstractCell* clone () const = 0;
+      virtual AbstractCell* clone () const = 0;
 
 };
 
@@ -60,6 +60,7 @@ class ConwayCell : public AbstractCell {
       bool diagNeighbors();
       bool changeState();
       char getState();
+      ConwayCell* clone() const;
 };
 
 class FredkinCell : public AbstractCell {
@@ -74,6 +75,7 @@ class FredkinCell : public AbstractCell {
       bool diagNeighbors();
       bool changeState();
       char getState();
+      FredkinCell* clone() const;
 
 };
 // ---------
@@ -134,6 +136,9 @@ class Handle {
             std::swap(_p, that._p);}};
 
 class Cell : Handle<AbstractCell> {
+  public: 
+  
+  Cell(bool alive) :  Handle<AbstractCell> (new FredkinCell(alive)) {}
   Cell(AbstractCell* p) : 
     Handle<AbstractCell> (p) {}
   bool diagNeighbors(){
@@ -151,6 +156,7 @@ class Cell : Handle<AbstractCell> {
   void setNeighbors(int n){
     get()->setNeighbors(n); 
   }
+  
 };
 // End Cell Handle
 
@@ -239,9 +245,9 @@ class Life {
     }
     void addCell(int type, int r, int c){
       if(type == CONWAY)
-        grid[r][c] = ConwayCell(true);
-      //else if(type == FREDKIN)
-      //  grid[r][c] = FredkinCell(true);
+        grid[r][c] = T(true);
+      else if(type == FREDKIN)
+        grid[r][c] = T(true);
       //else if(type == CELL)
         //TODO
         //grid[r][c] = Cell(0);
