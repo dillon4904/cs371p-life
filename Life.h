@@ -6,6 +6,10 @@
 #define Shapes_h
 
 #include <iostream> // istream, ostream
+#include <utility>
+#define CELL 0
+#define CONWAY 1
+#define FREDKIN 2
 
 class AbstractCell {
     protected:
@@ -18,7 +22,7 @@ class AbstractCell {
     public:
       //Abstract methods
       virtual bool diagNeighbors() = 0;
-      virtual void changeState() = 0;
+      virtual bool changeState() = 0;
       virtual char getState() = 0;
       //Methods with default implementation
       virtual bool isAlive();
@@ -31,6 +35,10 @@ class AbstractCell {
             alive = that.alive;
             neighbors = that.neighbors;
             return *this;}
+
+      virtual ~AbstractCell() {
+
+      }
 /*
       AbstractShape (const AbstractShape& that) :
                 _x (that._x),
@@ -50,7 +58,7 @@ class ConwayCell : public AbstractCell {
       }
       
       bool diagNeighbors();
-      void changeState();
+      bool changeState();
       char getState();
 };
 
@@ -64,7 +72,7 @@ class FredkinCell : public AbstractCell {
         return true; 
       }
       bool diagNeighbors();
-      void changeState();
+      bool changeState();
       char getState();
 
 };
@@ -75,15 +83,15 @@ class FredkinCell : public AbstractCell {
 #include <algorithm> // swap
 
 template <typename T>
-class Cell {
-    friend bool operator == (const Cell& lhs, const Cell& rhs) {
+class Handle {
+    friend bool operator == (const Handle& lhs, const Handle& rhs) {
         if (!lhs._p && !rhs._p)
             return true;
         if (!lhs._p || !rhs._p)
             return false;
         return (*lhs._p == *rhs._p);}
 
-    friend bool operator != (const Cell& lhs, const Cell& rhs) {
+    friend bool operator != (const Handle& lhs, const Handle& rhs) {
         return !(lhs == rhs);}
 
     public:
@@ -106,54 +114,138 @@ class Cell {
             return _p;}
 
     public:
-        Cell (pointer p) {
+        Handle (pointer p) {
             _p = p;}
 
-        Cell (const Cell& that) {
+        Handle (const Handle& that) {
             if (!that._p)
                 _p = 0;
             else
                 _p = that._p->clone();}
 
-        ~Cell () {
+        ~Handle () {
             delete _p;}
 
-        Cell& operator = (Cell that) {
+        Handle& operator = (Handle that) {
             swap(that);
             return *this;}
 
-        void swap (Cell& that) {
+        void swap (Handle& that) {
             std::swap(_p, that._p);}};
 
+class Cell : Handle<AbstractCell> {
+  Cell(AbstractCell* p) : 
+    Handle<AbstractCell> (p) {}
+  bool diagNeighbors(){
+    return get()-> diagNeighbors();
+  }
+  bool changeState(){
+    return get()-> changeState();
+  }
+  char getState(){
+    return get()-> getState();
+  }
+  bool isAlive(){
+    return get()-> isAlive();
+  }
+  void setNeighbors(int n){
+    get()->setNeighbors(n); 
+  }
+};
 // End Cell Handle
 
 using namespace std;
 template<typename T>
 class Life {
   private:
+    int gen;
+    int pop;
     int x;
     int y; 
     vector< vector<T> > grid; 
   
   public:
-    Life<T>(int x1, int y1){
-      x = x1;
-      y = y1;
+    Life<T>(pair<int, int> size){
+      gen = 0;
+      pop = 0;  
+      x = size.first;
+      y = size.second;
       T filler(false);
       vector<T> filled(y, filler);
       grid.resize(x, filled );
     }
 
     void printGrid(ostream& out){
+      out << "Generation = " << gen << ", Population = " << pop << "." << endl;
       for(vector<T> row : grid){
         for(T cell : row){
           out << cell.getState();
         }
         out << endl;
       }
+      out << endl;
     }  
-    void move(int n);
-    void AddCell(T cell, int r, int c);
+
+
+    void move(int n){
+      for(int i = 0; i < n; i++){
+        //Set number of neighbors
+        gen++;
+        for(int r = 0; r < x; r++){
+          for(int c = 0; c < y; c++){
+             int num = 0;
+             bool diagNeighbors = grid[r][c].diagNeighbors();
+             bool rightSafe = (r+1 < x);
+             bool leftSafe = (r-1 >= 0);
+             bool upSafe = (c-1 >= 0);
+             bool downSafe = (c+1 < y);
+             if(upSafe){
+               if(grid[r][c-1].isAlive()) num++;  
+             }
+             if(downSafe){
+               if(grid[r][c+1].isAlive()) num++;  
+             }
+             if(leftSafe) {
+               if(grid[r-1][c].isAlive()) num++;
+             }
+             if(rightSafe){
+               if(grid[r+1][c].isAlive()) num++;  
+             }
+             if(diagNeighbors){
+               if(leftSafe && upSafe){
+                 if(grid[r-1][c-1].isAlive()) num++;
+               }
+               if(leftSafe && downSafe){
+                 if(grid[r-1][c+1].isAlive()) num++;  
+               }
+               if(rightSafe && downSafe){
+                 if(grid[r+1][c+1].isAlive()) num++;  
+               }
+               if(rightSafe && upSafe){
+                 if(grid[r+1][c-1].isAlive()) num++;  
+               }
+             }
+            grid[r][c].setNeighbors(num);
+          }
+        }
+        pop = 0;
+        //neighbors set up
+        for(int r = 0; r < x; r++){
+          for(int c = 0; c < y; c++){
+            if(grid[r][c].changeState()) pop++;
+          }
+        }
+      }
+    }
+    void addCell(int type, int r, int c){
+      if(type == CONWAY)
+        grid[r][c] = ConwayCell(true);
+      //else if(type == FREDKIN)
+      //  grid[r][c] = FredkinCell(true);
+      //else if(type == CELL)
+        //TODO
+        //grid[r][c] = Cell(0);
+    }    
 };
 
 
