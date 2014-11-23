@@ -178,7 +178,6 @@ int main () {
         if(cstr[y] == '0') life.addCell(FREDKIN, x, y);
       }
     }
-    life.printGrid(cout);
     int moves;
     for(moves = 0; moves <= 5; moves++){
       life.printGrid(cout); 

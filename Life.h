@@ -145,10 +145,18 @@ class Cell : Handle<AbstractCell> {
     return get()-> diagNeighbors();
   }
   bool changeState(){
-    return get()-> changeState();
+    bool out = get()-> changeState();
+    char c = get()-> getState();
+    
+    if(c == '.' || c== '*' || c == '0' || c== '1'){
+      return out;
+    }
+    Cell cell(new ConwayCell(true));
+    swap(cell);
+    return out;
   }
   char getState(){
-    return get()-> getState();
+    return get() -> getState();
   }
   bool isAlive(){
     return get()-> isAlive();
