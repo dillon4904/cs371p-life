@@ -1,0 +1,77 @@
+commit aeb5e06b37ff1be3a7f1ea5cb6e40d5103cc4f2d
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Sun Nov 23 21:45:07 2014 -0600
+
+    Added doxygen stuff
+
+commit cb481f4ab454e49923cb1370bea73f4bb7033a38
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Sun Nov 23 21:43:08 2014 -0600
+
+    uml diagram and minor fixes
+
+commit 48260d7795f2f740457f80979c0d7369f656444d
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Sun Nov 23 21:06:14 2014 -0600
+
+    final Unit tests up and running, closes #3 closes #4
+
+commit 166923c1b16f91fccadca12934d4b73b03cb7fd3
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Sun Nov 23 19:52:32 2014 -0600
+
+    RunLife.out now matches perfectly with public repo
+
+commit 7aae1326fb601b8aa86f721909535085e2dbc174
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Sun Nov 23 16:26:19 2014 -0600
+
+    RunLife finishes correctly and handles the Cell handle! Closes #5 closes #20
+
+commit 3270d11734264061af08ab26448f85ef8dc60439
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Fri Nov 21 22:29:59 2014 -0600
+
+    Cell handle works with FredkinCells closes #16
+
+commit ec6d4fd22fa8e0a2ea64de7de7d9b45583225ec3
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Fri Nov 21 21:24:27 2014 -0600
+
+    ConwayCells working, base Cell handle created, FredkinCells give compile errors
+
+commit c0f77baf28c2074c5b00125d03f013ccfb991f4d
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 20:21:41 2014 -0600
+
+    Initial working printing of grid
+
+commit 226e63d7eecd79ab1c20f4ec3391b0f2de5bdbc0
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 19:28:11 2014 -0600
+
+    Inheritance working better, some default methods implemented, tests working
+
+commit 92a93c5c72d9b44850e72715a363f5c67e1d0ae8
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 17:09:12 2014 -0600
+
+    Compiles with very basic inheritance features
+
+commit 1d89fd927e06ba9a44c76963159efff3a4fb6e9d
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 14:41:53 2014 -0600
+
+    still messing with git setup
+
+commit 4db8c80b8ba18b8bfc492f2d00f1cb27dcc2a93f
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 14:36:11 2014 -0600
+
+    Nothing, just a test of git
+
+commit 8762f4bc3f213e42b091cc48874477310161334f
+Author: dillon4904 <dtcaryl12@mail.strakejesuit.org>
+Date:   Thu Nov 20 14:33:48 2014 -0600
+
+    Initial copy
