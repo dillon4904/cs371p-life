@@ -39,7 +39,7 @@ int main () {
     // Conway Cell 21x13
     // -----------------
   {
-    cout << "*** Life<ConwayCell> 21x13 ***" << endl;
+    cout << "*** Life<ConwayCell> 21x13 ***" << endl << endl;
     pair<int, int> sizes = readHeader(cin);
     Life<ConwayCell> life(sizes); 
     string line;
@@ -67,7 +67,7 @@ int main () {
     // Conway Cell 20x29
     // -----------------
   {
-    cout << "*** Life<ConwayCell> 20x29 ***" << endl;
+    cout << "*** Life<ConwayCell> 20x29 ***" << endl << endl;
     pair<int, int> sizes = readHeader(cin);
     Life<ConwayCell> life(sizes); 
     string line;
@@ -79,7 +79,6 @@ int main () {
         if(cstr[y] == '*') life.addCell(CONWAY, x, y);
       }
     }
-    life.printGrid(cout);
     int moves;
     for(moves = 0; moves <= 28; moves++){
       if(moves % 4 == 0)
@@ -95,7 +94,7 @@ int main () {
     // Conway Cell 109x69
     // ------------------
   {
-    cout << "*** Life<ConwayCell> 109x69 ***" << endl;
+    cout << "*** Life<ConwayCell> 109x69 ***" << endl <<endl;
     pair<int, int> sizes = readHeader(cin);
     Life<ConwayCell> life(sizes); 
     string line;
@@ -107,7 +106,6 @@ int main () {
         if(cstr[y] == '*') life.addCell(CONWAY, x, y);
       }
     }
-    life.printGrid(cout);
     int moves;
     for(moves = 0; moves <= 9; moves++){
       life.printGrid(cout); 
@@ -137,7 +135,7 @@ int main () {
     // ------------------
 
   {
-    cout << "*** Life<FredkinCell> 20x20 ***" << endl;
+    cout << "*** Life<FredkinCell> 20x20 ***" << endl << endl;
     pair<int, int> sizes = readHeader(cin);
     Life<FredkinCell> life(sizes); 
     string line;
@@ -149,7 +147,6 @@ int main () {
         if(cstr[y] == '0') life.addCell(FREDKIN, x, y);
       }
     }
-    life.printGrid(cout);
     int moves;
     for(moves = 0; moves <= 5; moves++){
       life.printGrid(cout); 
@@ -166,7 +163,7 @@ int main () {
     // ----------
 
   {
-    cout << "*** Life<Cell> 20x20 ***" << endl;
+    cout << "*** Life<Cell> 20x20 ***" << endl << endl;
     pair<int, int> sizes = readHeader(cin);
     Life<Cell> life(sizes); 
     string line;

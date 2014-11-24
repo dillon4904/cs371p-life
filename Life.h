@@ -148,7 +148,7 @@ class Cell : Handle<AbstractCell> {
     bool out = get()-> changeState();
     char c = get()-> getState();
     
-    if(c == '.' || c== '*' || c == '0' || c== '1'){
+    if(c == '.' || c== '*' || c=='-' || c == '0' || c== '1'){
       return out;
     }
     Cell cell(new ConwayCell(true));
@@ -252,6 +252,7 @@ class Life {
       }
     }
     void addCell(int type, int r, int c){
+      pop++;
       if(type == CONWAY)
         grid[r][c] = T(true);
       else if(type == FREDKIN)
