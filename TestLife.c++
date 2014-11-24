@@ -240,28 +240,32 @@ TEST(Life, f4) {
 
 TEST(Life, c1) {
    ConwayCell cell(true); 
-   ConwayCell cell2 = cell.clone();
-   ASSERT_TRUE(cell.getState() == cell2.getState());
+   ConwayCell* cell2 = cell.clone();
+   ASSERT_TRUE(cell.getState() == cell2->getState());
+   delete cell2;
 }
 
 TEST(Life, c2) {
    FredkinCell cell(true); 
-   FredkinCell cell2 = cell.clone();
-   ASSERT_TRUE(cell.getState() == cell2.getState());
+   FredkinCell* cell2 = cell.clone();
+   ASSERT_TRUE(cell.getState() == cell2->getState());
+   delete cell2;
 }
 
 TEST(Life, c3) {
    ConwayCell cell(true); 
-   ConwayCell cell2 = cell.clone();
-   cell2.changeState();
-   ASSERT_TRUE(cell.getState() != cell2.getState());
+   ConwayCell* cell2 = cell.clone();
+   cell2->changeState();
+   ASSERT_TRUE(cell.getState() != cell2->getState());
+   delete cell2;
 }
 
 TEST(Life, c4) {
    FredkinCell cell(true); 
-   FredkinCell cell2 = cell.clone();
+   FredkinCell* cell2 = cell.clone();
    cell.changeState();
-   ASSERT_TRUE(cell.getState() != cell2.getState());
+   ASSERT_TRUE(cell.getState() != cell2->getState());
+   delete cell2;
 }
 
 TEST(Life, x1) {

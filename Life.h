@@ -30,6 +30,7 @@ class AbstractCell {
       
       AbstractCell (bool living){
         alive = living;
+        neighbors = 0;
       }
       AbstractCell& operator = (const AbstractCell& that) {
             alive = that.alive;
